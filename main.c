@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 #define Bubble 0
 #define Merge 1
@@ -8,7 +9,7 @@
 #define Radix 3
 #define Shell 4
 //Configs
-#define QUANTIDADE_ELEMENTOS 150
+#define QUANTIDADE_ELEMENTOS 250
 
 /*
  Autogres: Gustavo Colombelli Alessio e Bruno Luiz Shuszter
@@ -22,7 +23,7 @@ void bubble(int vetor[]) {
     for (k = 1; k <= QUANTIDADE_ELEMENTOS; k++) {
         printf("\n------>[%d]<------\n", k);
 
-        for (j = 0; j <= QUANTIDADE_ELEMENTOS - 1; j++) {
+        for (j = 0; j <= QUANTIDADE_ELEMENTOS; j++) {
             printf("%d, ", j);
 
             if (vetor[j] > vetor[j + 1]) {
@@ -32,9 +33,13 @@ void bubble(int vetor[]) {
             }
         }
     }
-    printf("\n---------\n");
+    printf("\n#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#\n");
 }
 
+void merge(int vetor[]){}
+void quick(int vetor[]){}
+void radix(int vetor[]){}
+void shell(int vetor[]){}
 
 
 
@@ -52,10 +57,11 @@ void gerarPiorCaso(int *vetor){
 
 // -------------- Funções responsaveis para geração de relatório --------------------
 
-typedef struct tempoOrdenacao{
+typedef struct infoAlgoritimo{
+    char nomeAlgoritimo [25];
     char inicioOrdenacao[80];
     char fimOrdenacao[80];
-}_tempoOrdenacao;
+}_infoAlgoritimo;
 
 void timeStamp(char * buffer){
 
@@ -68,64 +74,63 @@ void timeStamp(char * buffer){
   strftime (buffer,80,"%I:%M:%S",timeinfo);
 }
 
-void relatorioOrdenacao(_tempoOrdenacao algoritimoOrdenacao[]){
+void relatorioOrdenacao(_infoAlgoritimo algoritimoOrdenacao[], int tamVetor){
+    int i;
 
-    printf("RELATORIO - TEMPO DE ORDENACAOO\n\nQUANTIDADE DE ELEMENTOOS: %d\n\nALGORITIMO\tINICIO        |        FINAL\n", QUANTIDADE_ELEMENTOS);
 
-    printf("\nBubble\t\t%s      |        ", algoritimoOrdenacao[Bubble].inicioOrdenacao);
-    printf("%s", algoritimoOrdenacao[Bubble].fimOrdenacao);
+    printf("RELATORIO - TEMPO DE ORDENACAOO\n\nQUANTIDADE DE ELEMENTOOS: %d\n\nALGORITIMO\tINICIO    |  FINAL\n", QUANTIDADE_ELEMENTOS);
 
-    printf("\nMerge\t\t%s      |        ", algoritimoOrdenacao[Merge].inicioOrdenacao);
-    printf("%s", algoritimoOrdenacao[Merge].fimOrdenacao);
-
-    printf("\nQuick\t\t%s      |        ", algoritimoOrdenacao[Quick].inicioOrdenacao);
-    printf("%s", algoritimoOrdenacao[Quick].fimOrdenacao);
-
-    printf("\nRadix\t\t%s      |        ", algoritimoOrdenacao[Radix].inicioOrdenacao);
-    printf("%s", algoritimoOrdenacao[Radix].fimOrdenacao);
-
-    printf("\nShell\t\t%s      |        ", algoritimoOrdenacao[Shell].inicioOrdenacao);
-    printf("%s\n\n\n\n\n\n\n\n\n", algoritimoOrdenacao[Shell].fimOrdenacao);
-
+    for(i=0;i<5;i++){
+        printf("\n%s\t\t%s  |  %s",algoritimoOrdenacao[i].nomeAlgoritimo,
+                                                algoritimoOrdenacao[i].inicioOrdenacao,
+                                                algoritimoOrdenacao[i].fimOrdenacao);
+    }
+ printf("\n\n\n");
 }
 
 int main(){
   int i;
   int vetorPiorCaso[QUANTIDADE_ELEMENTOS];
-  _tempoOrdenacao algoritimoOrdenacao[5];
+  _infoAlgoritimo algoritimoOrdenacao[5];
   gerarPiorCaso(vetorPiorCaso);
 
-
    //--------Bubble
+  strcpy(algoritimoOrdenacao[Bubble].nomeAlgoritimo,"Bubble");
   timeStamp(algoritimoOrdenacao[Bubble].inicioOrdenacao);
+  gerarPiorCaso(vetorPiorCaso);
   bubble(vetorPiorCaso);
   timeStamp(algoritimoOrdenacao[Bubble].fimOrdenacao);
 
-
   //--------Merge
+  strcpy(algoritimoOrdenacao[Merge].nomeAlgoritimo,"*Merge");
   timeStamp(algoritimoOrdenacao[Merge].inicioOrdenacao);
-
+  gerarPiorCaso(vetorPiorCaso);
+  merge(vetorPiorCaso);
   timeStamp(algoritimoOrdenacao[Merge].fimOrdenacao);
 
-
    //--------Quick
+  strcpy(algoritimoOrdenacao[Quick].nomeAlgoritimo,"*Quick");
   timeStamp(algoritimoOrdenacao[Quick].inicioOrdenacao);
-
+  gerarPiorCaso(vetorPiorCaso);
+  quick(vetorPiorCaso);
   timeStamp(algoritimoOrdenacao[Quick].fimOrdenacao);
 
-
    //--------Radix
+  strcpy(algoritimoOrdenacao[Radix].nomeAlgoritimo,"*Radix");
   timeStamp(algoritimoOrdenacao[Radix].inicioOrdenacao);
-
+  gerarPiorCaso(vetorPiorCaso);
+  radix(vetorPiorCaso);
   timeStamp(algoritimoOrdenacao[Radix].fimOrdenacao);
 
-
    //--------Shell
+  strcpy(algoritimoOrdenacao[Shell].nomeAlgoritimo,"*Shell");
   timeStamp(algoritimoOrdenacao[Shell].inicioOrdenacao);
-
+  gerarPiorCaso(vetorPiorCaso);
+  shell(vetorPiorCaso);
   timeStamp(algoritimoOrdenacao[Shell].fimOrdenacao);
 
-  relatorioOrdenacao(algoritimoOrdenacao);
+  relatorioOrdenacao(algoritimoOrdenacao, (sizeof(algoritimoOrdenacao)/sizeof(algoritimoOrdenacao[0])));
 
+  system("\n\nPAUSE");
   return 0;
 }
