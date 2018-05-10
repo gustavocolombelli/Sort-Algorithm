@@ -12,7 +12,9 @@
 #define QUANTIDADE_ELEMENTOS 250
 
 /*
- Autogres: Gustavo Colombelli Alessio e Bruno Luiz Shuszter
+ Trabalho de Estrutura de Dados II
+ Autores: Gustavo Colombelli Alessio e Bruno Luiz Schuster
+
 */
 
 
